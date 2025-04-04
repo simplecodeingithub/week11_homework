@@ -12,3 +12,9 @@ def home():
     now = datetime.now()
     time_slot = get_time_of_day(now.hour)
     return render_template('home.html', title='Home', time_slot=time_slot, is_morning=True)
+
+
+@app.route('/welcome/<string:name>')
+@app.route('/welcome')
+def welcome(name="World"):
+    return render_template('welcome2.html', name=name, group='Everyone')

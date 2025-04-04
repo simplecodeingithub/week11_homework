@@ -1,115 +1,59 @@
-@import url('https://fonts.googleapis.com/css?family=Quicksand|Poppins:400,600&display=swap');
-
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
 body {
-    font-family: 'Poppins', sans-serif;
-    font-size: 18px;
-    line-height: 1.8;
-    background-color: #F8F9FA; /* Light Gray */
-    color: #333;
-    margin: 0;
-    padding: 0;
+
+      font: 20px Quicksand, sans-serif;
+      line-height: 1.8;
+      color: #f5f6f7;
+  }
+  h1    {color: #9B287B;}
+  p {font-size: 16px;}
+  .margin {margin-bottom: 25px;}
+  .bg-1 {
+      background-color: #9B287B; /* Amaranth Deep Purple */
+      color: #ffffff;
+  }
+  .bg-2 {
+      background-color: #122932; /* Dark Gunmetal */
+      color: #ffffff;
+  }
+  .bg-3 {
+      background-color: #F5E6E8; /* Isabelline */
+      color: #555555;
+  }
+  .bg-4 {
+      background-color: #383B53; /* Charcoal */
+      color: #fff;
+  }
+  .container-fluid {
+      padding-top: 20px;
+      padding-bottom: 20px;
+  }
+ .container-fluid.bg-light {
+    background-color: #eef2f3 !important; /* Soft gray-blue */
+    color: #333 !important; /* Dark text */
+    padding: 50px 0; /* More spacing */
 }
 
-/* Headings */
-h1 {
-    color: #6A0572; /* Deep Purple */
-    font-weight: 600;
-}
+  .navbar {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      border: 0;
+      border-radius: 0;
+      margin-bottom: 0;
+      font-size: 12px;
+      letter-spacing: 5px;
+  }
+  .navbar-nav  li a:hover {
+      color: #9B287B !important;
+  }
+    #message {
+      color: red;
+  }
 
-p {
-    font-size: 16px;
-}
-
-/* Background Colors */
-.bg-1 {
-    background-color: #6A0572; /* Deep Purple */
-    color: #ffffff;
-}
-
-.bg-2 {
-    background-color: #2C2C54; /* Midnight Blue */
-    color: #ffffff;
-}
-
-.bg-3 {
-    background-color: #F8F9FA; /* Light Gray */
-    color: #333;
-}
-
-.bg-4 {
-    background-color: #1E1E2E; /* Dark Navy */
-    color: #ffffff;
-}
-
-/* Navbar */
-.navbar {
-    background-color: #6A0572; /* Deep Purple */
-    padding: 12px 20px;
-    border: 0;
-    font-size: 14px;
-    letter-spacing: 2px;
-}
-
-.navbar-nav li a {
-    color: #fff !important;
-    transition: color 0.3s ease-in-out;
-}
-
-.navbar-nav li a:hover {
-    color: #FFD700 !important; /* Gold */
-}
-
-/* Buttons */
-.btn {
-    background-color: #6A0572; /* Deep Purple */
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: all 0.3s ease-in-out;
-}
-
-.btn:hover {
-    background-color: #8A2BE2; /* Blue Violet */
-}
-
-/* Form Styling */
-form {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    margin: 20px auto;
-}
-
-input, select {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-input:focus {
-    border-color: #6A0572;
-    outline: none;
-}
-
-/* Footer */
-footer {
-    background-color: #2C2C54;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
-/* Alert Messages */
-#message {
-    color: red;
-    font-weight: bold;
-    text-align: center;
+  /* Make the image larger */
+img.team-app-logo {
+    max-width: 250px; /* Adjust size */
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+    margin: 20px auto; /* Center the image */
 }
