@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main_styles.css') }}">
+    <title>{{ title }} Page</title>
+</head>
+<body>
+<header>
+    {% if is_morning %}
+        <p>Good Morning!</p>
+    {% else %}
+        <p>Good Afternoon!</p>
+    {% endif %}
+    <p>{{ time_slot }}</p>
+</header>
+
+<h1>{{ title }}</h1>
+
+{% block body_content %}
+{% endblock %}
+
+</body>
+</html>
