@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title or 'Home' }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main_styles.css') }}">
+</head>
+<body>
+    <h1>Welcome to the Team App</h1>
+    <p>Good {{ time_slot }}!</p>
+
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('view_people') }}">View Team Members</a></li>
+            <li><a href="{{ url_for('login') }}">Admin Login</a></li>
+        </ul>
+    </nav>
+</body>
+</html>

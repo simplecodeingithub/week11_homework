@@ -1,0 +1,29 @@
+{% extends "layout2.html" %}
+{% block content %}
+<h1 class="mb-4">Team Members</h1>
+
+{% if not is_logged_in %}
+<div class="login-message">
+    <p>To view all member details, please <a href="{{ url_for('login') }}">log in</a>.</p>
+</div>
+{% endif %}
+
+<div class="row">
+    {% for person in people %}
+    <div class="col-md-4">
+        <div class="card team-card">
+            <div class="card-body bg-3">
+                <h5 class="card-title">{{ person.first_name }}</h5>
+                {% if is_logged_in %}
+                <h6 class="card-subtitle mb-2 text-muted">{{ person.last_name }}</h6>
+                <p class="card-text">{{ person.role }}</p>
+                <a href="{{ url_for('member_detail', person_id=person.id) }}" class="btn btn-sm bg-1 text-white">View Profile</a>
+                {% else %}
+                <p class="card-text">Team Member</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
