@@ -152,13 +152,16 @@ def contact_us():
     return render_template("contact.html", title="Contact Us")
 
 
-@app.route('/about')
-def project_about():
-    return render_template('about_us.html', title="About Us")
+@app.route('/project_details/<int:project_id>')
+def project_detail(project_id):
+    # This line searches for a project with the given project_id and returns it; if not found, returns None
+    project = next((proj for proj in projects if proj['ID'] == project_id), None)
+    # If project is not found, return a 404 error page
+    if project is None:
+        return render_template('404.html'), 404
+    # If project is found, it renders the project_details page with the project data
+    return render_template('project_details.html', project=project)
 
-# @app.route('/about')
-# def project_about():
-#     return render_template('project_about.html', title="About Our Project")
 
 @app.route('/logout')
 def logout():

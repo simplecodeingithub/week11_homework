@@ -1,11 +1,14 @@
 {% extends "layout2.html" %}
 
 {% block body_content %}
-    <h3 class="margin">The Team website Project</h3>
+    <!-- Project Overview -->
+    <h3 class="margin" style="color: #9B287B; text-align: center;">{{ project.name }} Project</h3>
+
     <section>
         <p>We are a passionate team of developers working together to build innovative solutions.</p>
-       <h3>About This Project</h3>
-        <p>The <strong>Team Website</strong> is designed to be a hub for all team-related activities, enabling smooth communication and task management. The goal of the website is to facilitate the sharing of information, task assignments, and project progress tracking among the team members.</p>
+
+        <h3>About This Project</h3>
+        <p>The <strong>{{ project.name }}</strong> is designed to be a hub for all team-related activities, enabling smooth communication and task management. The goal of the website is to facilitate the sharing of information, task assignments, and project progress tracking among the team members.</p>
         <p>This platform was developed with simplicity and functionality in mind, making it easy for everyone to access project information, manage tasks, and stay updated with the team’s progress.</p>
 
         <h4>Technologies Used:</h4>
@@ -22,5 +25,14 @@
             <li>Ensure the website is responsive and accessible across different devices (desktop, tablet, and mobile).</li>
             <li>Incorporate features such as a task management system, project updates, and team communication.</li>
         </ul>
+
+        <!-- Dynamic Content for the Current Project -->
+        <h4>Project Description:</h4>
+        <p>{{ project.description }}</p>
+
+        <h4>Project Image:</h4>
+        <img src="/static/images/{{ project.image_src }}" class="img-fluid" alt="{{ project.name }}">
+
+        <p><a href="/projects">Back to All Projects</a></p>
     </section>
 {% endblock %}
