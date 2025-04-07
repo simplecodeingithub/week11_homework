@@ -1,6 +1,11 @@
-{% extends 'layout.html' %}
+{% extends 'layout2.html' %}
 
 {% block body_content %}
-    <h2>Welcome to Our Team App!</h2>
+    <h2 class="margin">Welcome, {{ name }}!</h2>
+    <p>We’re glad to have you here.</p>
+    <p>Group: {{ group }}</p>
+
+    <hr>
     <p>This is the home page. Here you can find all about our team and our mission.</p>
+    <p><em>Good {{ time_slot }}!</em></p>
 {% endblock %}

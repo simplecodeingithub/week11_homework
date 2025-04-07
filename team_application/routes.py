@@ -1,20 +1,140 @@
-from flask import render_template, url_for, request, redirect, session
+from flask import render_template, url_for, request, redirect, session, flash
 
 from team_application import app
 from datetime import datetime
 from team_application.utilities import get_time_of_day
+from team_application.forms.register_forms import RegisterForm
+from team_application.data_access import add_person, get_people
+from team_application.fake_data import people, projects
+import os
 
+# @app.route('/')
+# @app.route('/home')
+# def home():
+#     session['loggedIn'] = False  # Store the user's logged-in status as False in the session(not logged in when they visit the home page)
+#     now = datetime.now()
+#     time_slot = get_time_of_day(now.hour)
+#     return render_template('home.html', title='Home', time_slot=time_slot, is_morning=True)
+#
+#
+# @app.route('/welcome')
+# @app.route('/welcome/<string:name>')
+# def welcome(name="World"):
+#     return render_template('welcome2.html', name=name, group='Everyone')
 
 @app.route('/')
 @app.route('/home')
-def home():
+@app.route('/home/<string:name>')
+def home(name=None):
     session['loggedIn'] = False
     now = datetime.now()
     time_slot = get_time_of_day(now.hour)
-    return render_template('home.html', title='Home', time_slot=time_slot, is_morning=True)
+
+    if name is None:
+        name = "Guest"
+
+    return render_template('home.html',title='Home', time_slot=time_slot, name=name,group='Everyone')
 
 
-@app.route('/welcome/<string:name>')
-@app.route('/welcome')
-def welcome(name="World"):
-    return render_template('welcome2.html', name=name, group='Everyone')
+@app.route('/people')
+def all_people():
+    return render_template('people.html', people=people, title='All People')
+
+
+@app.route('/peopledb')
+def all_people_from_db():
+    people_from_db = get_people() # This fetches the list of people from the database
+    print(people_from_db)
+    return render_template('people2.html', people=people_from_db, title='Database People')
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    error = ""
+    register_form = RegisterForm()
+
+    if request.method == 'POST':
+        first_name = register_form.first_name.data
+        last_name = register_form.last_name.data
+        email = register_form.email.data
+
+        if len(first_name) == 0 or len(last_name) == 0:
+            error = 'Please supply both a first and last name'
+
+        else:
+            people.append({'Firstname': first_name, 'Lastname': last_name, 'Email': email})
+            add_person(first_name, last_name, email)
+            # Flash a success message
+            flash('Registration successful! Please login or signup.', 'success')  # 'success' is the category of the flash message
+            return redirect(url_for('register'))
+
+    return render_template('register.html', form=register_form, message=error)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        # Get the form data
+        session['username'] = request.form['username']
+        session['loggedIn'] = True
+        session['role'] = 'admin'
+        return redirect(url_for('projects'))  # Redirect to /projects after login
+    return render_template('login.html', title="Login")
+
+
+# Route to show an individual project
+@app.route('/project/<int:project_id>')
+def project_by_id(project_id):
+    if project_id + 1 > len(projects):  # If project_id is out of range, redirect to all projects page
+        return render_template('projects.html', projects=projects, title='All Projects')
+
+    # Time-based greeting
+    time_slot = get_time_of_day(datetime.now().hour)
+
+    # URLs to navigate for next and previous project
+    if len(projects) > project_id + 1:
+        next_url = url_for('project_by_id', project_id=project_id + 1)
+    else:
+        next_url = False
+    if project_id > 0:
+        previous_url = url_for('project_by_id', project_id=project_id - 1)
+    else:
+        previous_url = False
+
+        # Image paths for the project (checking for .jpg, .jpeg, and .png)
+    image_src = '/static/images/project_' + str(project_id) + '.jpg'
+    if not os.path.exists(os.path.join(app.static_folder, 'images/project_' + str(project_id) + '.jpg')):
+        image_src = '/static/images/project_' + str(project_id) + '.jpeg'
+        if not os.path.exists(os.path.join(app.static_folder, 'images/project_' + str(project_id) + '.jpeg')):
+            image_src = '/static/images/project_' + str(project_id) + '.png'
+
+    # Check for the existence of the optional GIF file for the project
+    gif_path = os.path.join(app.static_folder, 'images/project_' + str(project_id) + '.gif')
+    if os.path.exists(gif_path):
+        image_gif = '../static/images/project_' + str(project_id) + '.gif'
+    else:
+        image_gif = False
+
+    # Project title
+    title = projects[project_id]['name']
+
+    return render_template(
+        'project.html',
+        project=projects[project_id],
+        time_slot=time_slot,
+        next_url=next_url,
+        previous_url=previous_url,
+        image_src=image_src,
+        image_gif=image_gif,
+        title=title
+    )
+
+
+# Route to show all projects
+@app.route('/projects')
+def all_projects():
+    return render_template('projects.html', projects=projects, title='All Projects')
+
+@app.route('/about')
+def project_about():
+    return render_template('project_about.html', title="About Our Project")

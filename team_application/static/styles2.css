@@ -28,13 +28,13 @@ body {
       padding-top: 20px;
       padding-bottom: 20px;
   }
- .container-fluid.bg-light {
+   .container-fluid.bg-light {
     background-color: #eef2f3 !important; /* Soft gray-blue */
     color: #333 !important; /* Dark text */
     padding: 50px 0; /* More spacing */
 }
 
-  .navbar {
+ .navbar {
       padding-top: 15px;
       padding-bottom: 15px;
       border: 0;
@@ -46,14 +46,14 @@ body {
   .navbar-nav  li a:hover {
       color: #9B287B !important;
   }
+
+ .navbar-light {
+    background-color: #f5e6e8 !important; /* Isabelline */
+    color: #383b53 !important; /* Charcoal text for contrast */
+}
+
+
     #message {
-      color: red;
+      color: #122932; /* Dark Gunmetal */
   }
 
-  /* Make the image larger */
-img.team-app-logo {
-    max-width: 250px; /* Adjust size */
-    height: auto; /* Maintain aspect ratio */
-    display: block;
-    margin: 20px auto; /* Center the image */
-}

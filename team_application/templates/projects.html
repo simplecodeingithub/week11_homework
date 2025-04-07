@@ -1,0 +1,32 @@
+{% extends "layout2.html" %}
+
+{% block body_content %}
+
+<section>
+    <div class="row strong">
+        <div class="col-sm">ID</div>
+        <div class="col-sm">Name</div>
+        <div class="col-sm">Description</div>
+        <div class="col-sm">Main Image</div>
+    </div>
+    <hr>
+    {% for project in projects %}
+    <div class="row">
+        <div class="col-sm-3">
+            <p>{{ project.ID }}</p>
+        </div>
+        <div class="col-sm-3">
+            <p><strong>{{ project.name }}</strong></p>
+        </div>
+        <div class="col-sm-3">
+            <p>{{ project.description }}</p>
+        </div>
+        <div class="col-sm-3">
+            <img src="/static/images/{{ project.image_src }}" class="img-responsive margin" width="50%" alt="Main project image">
+        </div>
+        <hr>
+    </div>
+    {% endfor %}
+</section>
+
+{% endblock %}
