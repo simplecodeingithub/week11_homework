@@ -1,43 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <!-- Custom CSS -->
-    <link href="{{ url_for('static', filename='styles2.css') }}" rel="stylesheet" type="text/css">
     <title>{{ title or 'TeamApp' }}</title>
+
+    <!-- Fonts and Bootstrap -->
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+          crossorigin="anonymous">
+    <!-- Your CSS -->
+    <link href="{{ url_for('static', filename='styles2.css') }}" rel="stylesheet" type="text/css">
 </head>
 
 <body>
+
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-purple shadow-sm">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/home">TeamApp</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand fw-bold text-uppercase" href="/home">TeamApp</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left side: main navigation links -->
+            <!-- Left Links -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/">About Us</a>
-                </li>
-
-                <!-- Projects Dropdown -->
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                        Projects
-                    </a>
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Projects</a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/project/0">Project 0</a></li>
                         <li><a class="dropdown-item" href="/project/1">Project 1</a></li>
@@ -46,20 +39,12 @@
                         <li><a class="dropdown-item" href="/projects">All Projects</a></li>
                     </ul>
                 </li>
+                <li class="nav-item"><a class="nav-link" href="/teams">Teams</a></li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="/teams">Teams</a>
-                </li>
-
-                <!-- Admin visible only if admin -->
                 {% if session['role'] == 'admin' %}
-                <li class="nav-item">
-                    <a class="nav-link text-warning">ADMIN!!!</a>
-                </li>
+                <li class="nav-item"><a class="nav-link text-warning">Admin</a></li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                        Admin
-                    </a>
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Admin Access</a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/admin/users">View Users</a></li>
                         <li><a class="dropdown-item" href="/admin/manage_users">Manage Users</a></li>
@@ -69,11 +54,8 @@
                 </li>
                 {% endif %}
 
-                <!-- People Dropdown -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                        People
-                    </a>
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">People</a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/register">Register</a></li>
                         <li><hr class="dropdown-divider"></li>
@@ -83,53 +65,50 @@
                 </li>
             </ul>
 
-            <!-- Right side: Search + Login/Logout -->
+            <!-- Right side -->
             <form class="d-flex me-3" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <input class="form-control me-2" type="search" placeholder="Search">
+                <button class="btn btn-outline-light" type="submit">Search</button>
             </form>
 
             <ul class="navbar-nav">
                 {% if session['loggedIn'] %}
-                <li class="nav-item">
-                    <a class="nav-link" href="/logout">Logout</a>
-                </li>
+                <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
                 {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">Login</a>
-                </li>
+                <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
                 {% endif %}
             </ul>
         </div>
     </div>
 </nav>
 
-<!-- First Container -->
-<div class="container-fluid bg-2 text-center">
-    <a name="App"></a>
-    <h3 class="display-4 fw-bold mb-4" style="color: #2e7d32;">Team App</h3>
+<!-- Section -->
+<section class="bg-hero text-white text-center py-4">
+    <h1 class="display-4 fw-bold mb-3">TeamApp</h1>
 
     <img src="{{ url_for('static', filename='images/team-app-logo.png') }}"
-         alt="Team Collaboration Logo"
-         class="img-responsive img-rounded" style="display:inline"
-         width="15%" height="5%">
-    <p></p>
-    <p class="lead">A collaborative platform to manage your projects, teams, and productivity.</p>
+         alt="TeamApp Logo"
+         width="150"
+         class="img-fluid my-3 rounded-circle shadow-sm">
+
+    <p class="lead mt-3">A collaborative platform to manage your projects, teams, and productivity.</p>
     <p>Powered by Flask, Python, Jinja2, and Bootstrap 5.</p>
-</div>
+</section>
 
-<!-- Second Container -->
-<div class="container-fluid bg-3 text-left">
-    <a name="prod_info"></a>
-    <h1>{{ title }}</h1>
+<!-- Main Content -->
+<main class="container-fluid bg-3 py-4">
+    <div class="container">
+        <h2 class="text-center mb-4" style="color: #9B287B;">{{ title }}</h2>
 
-    {% block body_content %}
-    {% endblock %}
-</div>
+        {% block body_content %}
+        {% endblock %}
+    </div>
+</main>
+
 
 <!-- Footer -->
-<footer class="container-fluid bg-dark text-white text-center py-3">
-    <p>&copy; 2024 TeamApp Inc.</p>
+<footer class="bg-purple text-white text-center py-3">
+    <p class="mb-0">&copy; 2024 TeamApp Inc.</p>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

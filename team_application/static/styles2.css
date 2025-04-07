@@ -1,59 +1,63 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand');
+
 body {
-
-      font: 20px Quicksand, sans-serif;
-      line-height: 1.8;
-      color: #f5f6f7;
-  }
-  h1    {color: #9B287B;}
-  p {font-size: 16px;}
-  .margin {margin-bottom: 25px;}
-  .bg-1 {
-      background-color: #9B287B; /* Amaranth Deep Purple */
-      color: #ffffff;
-  }
-  .bg-2 {
-      background-color: #122932; /* Dark Gunmetal */
-      color: #ffffff;
-  }
-  .bg-3 {
-      background-color: #F5E6E8; /* Isabelline */
-      color: #555555;
-  }
-  .bg-4 {
-      background-color: #383B53; /* Charcoal */
-      color: #fff;
-  }
-  .container-fluid {
-      padding-top: 20px;
-      padding-bottom: 20px;
-  }
-   .container-fluid.bg-light {
-    background-color: #eef2f3 !important; /* Soft gray-blue */
-    color: #333 !important; /* Dark text */
-    padding: 50px 0; /* More spacing */
+    font-family: 'Quicksand', sans-serif;
+    font-size: 18px;
+    line-height: 1.7;
+    background-color: #f3edf7;
+    color: #2c2c2c;
 }
 
- .navbar {
-      padding-top: 15px;
-      padding-bottom: 15px;
-      border: 0;
-      border-radius: 0;
-      margin-bottom: 0;
-      font-size: 12px;
-      letter-spacing: 5px;
-  }
-  .navbar-nav  li a:hover {
-      color: #9B287B !important;
-  }
+/* Custom Color Classes */
+.bg-purple {
+    background-color: #9B287B;
+}
 
- .navbar-light {
-    background-color: #f5e6e8 !important; /* Isabelline */
-    color: #383b53 !important; /* Charcoal text for contrast */
+.bg-hero {
+    background-color: #B03A9B;
+    padding: 40px 20px;  /* Reduced padding */
+}
+
+.bg-hero img {
+    max-width: 150px;  /* Reduced logo size */
+    transition: transform 0.3s ease;
+}
+
+.bg-hero img:hover {
+    transform: scale(1.05);
+}
+
+.bg-hero .lead {
+    font-size: 1.1rem;
 }
 
 
-    #message {
-      color: #122932; /* Dark Gunmetal */
-  }
+.bg-content {
+    background-color: #ffffff;
+}
 
+/* Navbar Customizations */
+.navbar-brand {
+    color: #ffffff !important;
+    font-weight: 600;
+    font-size: 22px;
+}
+
+.navbar-nav .nav-link {
+    color: #f3edf7 !important;
+    font-weight: 500;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ffb3da !important;
+}
+
+/* Footer */
+footer {
+    font-size: 14px;
+}
+
+/* Optional: Shadow Card Look */
+.shadow-sm {
+    box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.05) !important;
+}

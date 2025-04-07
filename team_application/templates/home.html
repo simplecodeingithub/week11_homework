@@ -1,11 +1,21 @@
 {% extends 'layout2.html' %}
 
 {% block body_content %}
-    <h2 class="margin">Welcome, {{ name }}!</h2>
-    <p>We’re glad to have you here.</p>
-    <p>Group: {{ group }}</p>
+<div class="container py-4 text-center">
+    <!-- Welcome Heading -->
+    <h2 class="fw-bold mb-3" style="color: #9B287B;">Welcome, {{ name }}!</h2>
+    <p class="lead mb-3">We’re thrilled to have you as part of the team!</p>
 
-    <hr>
-    <p>This is the home page. Here you can find all about our team and our mission.</p>
-    <p><em>Good {{ time_slot }}!</em></p>
+    <!-- Group Info -->
+    <div class="bg-light py-3 px-4 rounded shadow-sm d-inline-block mb-4" style="max-width: 400px;">
+        <h5 class="mb-1 text-dark">Your Group: <strong>{{ group }}</strong></h5>
+        <p class="text-muted mb-0">Team Size: <strong>5 members</strong></p>
+    </div>
+
+    <hr class="my-4" style="max-width: 600px; margin: auto;">
+
+    <!-- Dashboard Info -->
+    <p class="mb-2">This is your personal dashboard where you’ll find everything related to your team and projects.</p>
+    <p class="text-muted"><em>Good {{ time_slot }}!</em></p>
+</div>
 {% endblock %}

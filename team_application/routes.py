@@ -33,19 +33,7 @@ def home(name=None):
     if name is None:
         name = "Guest"
 
-    return render_template('home.html',title='Home', time_slot=time_slot, name=name,group='Everyone')
-
-
-@app.route('/people')
-def all_people():
-    return render_template('people.html', people=people, title='All People')
-
-
-@app.route('/peopledb')
-def all_people_from_db():
-    people_from_db = get_people() # This fetches the list of people from the database
-    print(people_from_db)
-    return render_template('people2.html', people=people_from_db, title='Database People')
+    return render_template('home.html',title='Home-TeamApp', time_slot=time_slot, name=name,group='Group-3')
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -77,8 +65,14 @@ def login():
         # Get the form data
         session['username'] = request.form['username']
         session['loggedIn'] = True
-        session['role'] = 'admin'
-        return redirect(url_for('projects'))  # Redirect to /projects after login
+
+        # Set the role based on the username or some condition
+        if session['username'] == 'admin_user':  # Example condition
+            session['role'] = 'admin'
+        else:
+            session['role'] = 'user'
+
+        return redirect(url_for('all_projects'))  # Redirect to /projects after login
     return render_template('login.html', title="Login")
 
 
@@ -135,6 +129,26 @@ def project_by_id(project_id):
 def all_projects():
     return render_template('projects.html', projects=projects, title='All Projects')
 
+@app.route('/people')
+def all_people():
+    return render_template('people.html', people=people, title='All People')
+
+
+@app.route('/peopledb')
+def all_people_from_db():
+    people_from_db = get_people() # This fetches the list of people from the database
+    print(people_from_db)
+    return render_template('people2.html', people=people_from_db, title='Database People')
+
+
 @app.route('/about')
 def project_about():
     return render_template('project_about.html', title="About Our Project")
+
+@app.route('/logout')
+def logout():
+    # remove the username from the session if it is there
+    session.pop('username', None)
+    session.pop('role', None)
+    session['loggedIn'] = False
+    return redirect(url_for('home'))
