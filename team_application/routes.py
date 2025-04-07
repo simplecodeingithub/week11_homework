@@ -141,9 +141,24 @@ def all_people_from_db():
     return render_template('people2.html', people=people_from_db, title='Database People')
 
 
+@app.route("/contact", methods=["GET", "POST"])
+def contact_us():
+    if request.method == "POST":
+        name = request.form.get("name")
+        email = request.form.get("email")
+        message = request.form.get("message")
+        print(f"Contact form submitted: {name}, {email}, {message}")
+        flash("Message sent successfully!", "success")
+    return render_template("contact.html", title="Contact Us")
+
+
 @app.route('/about')
 def project_about():
-    return render_template('project_about.html', title="About Our Project")
+    return render_template('about_us.html', title="About Us")
+
+# @app.route('/about')
+# def project_about():
+#     return render_template('project_about.html', title="About Our Project")
 
 @app.route('/logout')
 def logout():
