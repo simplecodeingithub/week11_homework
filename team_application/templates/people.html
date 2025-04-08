@@ -38,23 +38,22 @@
 
 <!-- JavaScript to filter the people list -->
 <script>
-    document.getElementById('searchInput').addEventListener('keyup', function () {
-        const query = this.value.toLowerCase();
-        const people = document.querySelectorAll('#peopleList .person-entry');
-        let anyVisible = false;
+ document.getElementById('searchInput').addEventListener('keyup', function () {
+     const query = this.value.toLowerCase();
+     const people = document.querySelectorAll('#peopleList .person-entry');
+     let anyVisible = false;
 
-    people.forEach(function (entry) {
-        const text = entry.textContent.toLowerCase();
-        const isMatch = text.includes(query);
-        entry.style.display = isMatch ? '' : 'none';
-        if (isMatch) anyVisible = true;
-    });
+     people.forEach(function (entry) {
+         const text = entry.textContent.toLowerCase();
+         const isMatch = text.includes(query);
+         entry.style.display = isMatch ? '' : 'none';
+         if (isMatch) anyVisible = true;
+     });
 
-    // Show or hide the "no results" message
-    document.getElementById('noResults').style.display = anyVisible ? 'none' : '';
-});
+     // Show or hide the "no results" message
+     document.getElementById('noResults').style.display = anyVisible ? 'none' : '';
+ });
 </script>
-
 {% endblock %}
 
 <!--<section>-->
@@ -81,4 +80,4 @@
 <!--    <a href="/register">Add new person</a>-->
 <!--</section>-->
 
-<!--{% endblock %}-->
+
