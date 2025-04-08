@@ -5,7 +5,7 @@ from datetime import datetime
 from team_application.utilities import get_time_of_day
 from team_application.forms.register_forms import RegisterForm
 from team_application.data_access import add_person, get_people
-from team_application.fake_data import people, projects
+from team_application.data import people, projects
 import os
 
 # @app.route('/')
@@ -129,9 +129,12 @@ def project_by_id(project_id):
 def all_projects():
     return render_template('projects.html', projects=projects, title='All Projects')
 
+# Display only first names to users not logged in, and show full names/emails if they are logged in.
 @app.route('/people')
 def all_people():
-    return render_template('people.html', people=people, title='All People')
+    is_logged_in = session.get('loggedIn', False)
+    return render_template('people.html', people=people, title='All People', is_logged_in=is_logged_in)
+    # return render_template('people.html', people=people, title='All People')
 
 
 @app.route('/peopledb')
