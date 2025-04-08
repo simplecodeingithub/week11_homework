@@ -74,7 +74,7 @@ def login():
 
         next_page = request.args.get('next')
         return redirect(next_page or url_for('home'))  # Redirect to /projects after login
-    return render_template('login.html', title="Login")
+    return render_template('login.html')
 
 
 # Route to show an individual project
