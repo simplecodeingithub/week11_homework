@@ -1,0 +1,28 @@
+{% extends "layout2.html" %}
+{% block body_content %}
+
+{% if team_members %}
+    <h2 class="text-center my-4">Our Team</h2>
+    <div class="container">
+        <div class="row">
+            {% for member in team_members %}
+            <div class="col-md-4 mb-3">
+                <div class="card shadow-sm text-center p-3">
+                    <h5><a href="{{ url_for('teams', person_id=member.id) }}">{{ member.first_name }} {{ member.last_name }}</a></h5>
+                    <p class="text-muted">{{ member.role }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% elif person %}
+    <div class="container mt-5">
+        <h2>{{ person.first_name }} {{ person.last_name }}</h2>
+        <p><strong>Role:</strong> {{ person.role }}</p>
+        <p><strong>Bio:</strong> {{ person.bio }}</p>
+        <a href="{{ url_for('teams') }}" class="btn btn-secondary mt-3">← Back to Team</a>
+    </div>
+{% endif %}
+
+{% endblock %}

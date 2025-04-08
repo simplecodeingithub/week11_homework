@@ -6,6 +6,7 @@ from team_application.utilities import get_time_of_day
 from team_application.forms.register_forms import RegisterForm
 from team_application.data_access import add_person, get_people
 from team_application.data import people, projects
+from team_application.fake_data import person
 import os
 
 # @app.route('/')
@@ -71,7 +72,8 @@ def login():
         else:
             session['role'] = 'user'
 
-        return redirect(url_for('all_projects'))  # Redirect to /projects after login
+        next_page = request.args.get('next')
+        return redirect(next_page or url_for('home'))  # Redirect to /projects after login
     return render_template('login.html', title="Login")
 
 
@@ -176,6 +178,7 @@ def view_users():
 
     users = get_people()
     return render_template('view_users.html', users=users)
+
 
 
 @app.route('/logout')
