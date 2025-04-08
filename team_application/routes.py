@@ -61,20 +61,25 @@ def register():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    error = ""
     if request.method == 'POST':
-        # Get the form data
-        session['username'] = request.form['username']
-        session['loggedIn'] = True
+        # Get the form data (assuming username is the firstname here)
+        firstname = request.form['username']
 
-        # Set the role based on the username or some condition
-        if session['username'] == 'admin_user':  # Example condition
+        # Simple check for admin user
+        if firstname == 'admin_user':  # If the firstname is 'admin_user'
             session['role'] = 'admin'
         else:
             session['role'] = 'user'
 
+        session['username'] = firstname  # Store the username in the session
+        session['loggedIn'] = True  # Mark the user as logged in
+
+        # Redirect to home or next page after login
         next_page = request.args.get('next')
-        return redirect(next_page or url_for('home'))  # Redirect to /projects after login
-    return render_template('login.html')
+        return redirect(next_page or url_for('all_projects'))  # Redirect to home or the requested page
+
+    return render_template('login.html', message=error)  # Show login page
 
 
 # Route to show an individual project
@@ -145,15 +150,26 @@ def all_people_from_db():
     return render_template('people2.html', people=people_from_db, title='Database People')
 
 
-@app.route("/contact", methods=["GET", "POST"])
+@app.route('/contact', methods=['GET', 'POST'])
 def contact_us():
-    if request.method == "POST":
-        name = request.form.get("name")
-        email = request.form.get("email")
-        message = request.form.get("message")
-        print(f"Contact form submitted: {name}, {email}, {message}")
-        flash("Message sent successfully!", "success")
-    return render_template("contact.html", title="Contact Us")
+    success = False
+    if request.method == 'POST':
+        # Here you can get the form data
+        name = request.form['name']
+        email = request.form['email']
+        message = request.form['message']
+
+
+        # For example, just printing the data to the console
+        print(f"New message from {name} ({email}): {message}")
+
+        # Set the success flag to True after form submission
+        success = True
+
+        # Redirect to the same page with a success message
+        return render_template('contact.html', success=success)
+
+    return render_template('contact.html', success=success)
 
 
 @app.route('/project_details/<int:project_id>')

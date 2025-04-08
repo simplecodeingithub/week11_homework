@@ -72,15 +72,17 @@ def main():
 
     cursor = mydb.cursor()
 
-    sql = "INSERT INTO person (firstname, lastname, email,role) VALUES (%s, %s, %s)"
-    val = ("Fred", "Flintstone", "FredFlin@gmail.com","user")
-
-
-    cursor.execute(sql, val)
+    sql = "INSERT INTO person (firstname, lastname, email, role) VALUES (%s, %s, %s, %s)"
+    val = [
+        ("Fred", "Flintstone", "FredFlin@gmail.com", "user"),
+        ("Alice", "Anderson", "alice.admin@example.com", "admin")
+    ]
+    cursor.executemany(sql, val)
 
     mydb.commit()
 
     print(cursor.rowcount, "record inserted.")
+
 
 
 if __name__ == "__main__":

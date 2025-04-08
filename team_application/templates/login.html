@@ -16,7 +16,9 @@
         <form method="POST">
             <div class="mb-3">
                 <label for="username" class="form-label fw-bold">Username</label>
-                <input type="text" id="username" name="username" class="form-control" placeholder="Enter Username" required />
+                <!-- The value of the username field will be pre-filled with the user's first name if available -->
+                <input type="text" id="username" name="username" class="form-control" placeholder="Enter Your Firstname"
+                       value="{{ session.get('username', '') }}" required />
             </div>
 
             <div class="mb-3">
