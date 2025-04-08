@@ -1,22 +1,37 @@
 {% extends "layout2.html" %}
 
 {% block body_content %}
-<section>
-   <h3>Please login with your username and password!</h3>
+<section class="mt-4 d-flex justify-content-center">
+    <div class="container p-4 border rounded shadow" style="max-width: 500px; background-color: #f7f7f7;">
+        <h1 class="text-center mb-3">Login</h1>
+        <p class="text-center">Please login with your username and password!</p>
+        <hr>
 
-   {# Show an error message if login fails #}
-   {% if error %}
-   <p style="color: red;">{{ error }}</p>
-   {% endif %}
+        {% if error %}
+        <div class="alert alert-danger text-center">
+            {{ error }}
+        </div>
+        {% endif %}
 
-   <form action="" method="POST">
-      <p><label for="username">Username:</label></p>
-      <p><input type="text" id="username" name="username" required /></p>
+        <form method="POST">
+            <div class="mb-3">
+                <label for="username" class="form-label fw-bold">Username</label>
+                <input type="text" id="username" name="username" class="form-control" placeholder="Enter Username" required />
+            </div>
 
-      <p><label for="password">Password:</label></p>
-      <p><input type="password" id="password" name="password" required /></p>
+            <div class="mb-3">
+                <label for="password" class="form-label fw-bold">Password</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password" required />
+            </div>
 
-      <p><input type="submit" value="Login" /></p>
-   </form>
+            <div class="d-grid mb-3">
+                <input type="submit" value="Login" class="btn btn-primary" />
+            </div>
+        </form>
+
+        <div class="text-center mt-3">
+            <p>Don't have an account? <a href="{{ url_for('register') }}">Register</a>.</p>
+        </div>
+    </div>
 </section>
 {% endblock %}
