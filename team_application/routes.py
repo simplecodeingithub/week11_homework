@@ -1,4 +1,4 @@
-from flask import render_template, url_for, request, redirect, session, flash
+from flask import Flask,render_template, url_for, request, redirect, session, flash
 
 from team_application import app
 from datetime import datetime
@@ -29,10 +29,8 @@ def home(name=None):
     session['loggedIn'] = False
     now = datetime.now()
     time_slot = get_time_of_day(now.hour)
-
     if name is None:
         name = "Guest"
-
     return render_template('home.html',title='Home-TeamApp', time_slot=time_slot, name=name,group='Group-3')
 
 
@@ -40,6 +38,7 @@ def home(name=None):
 def register():
     error = ""
     register_form = RegisterForm()
+    role = "User"
 
     if request.method == 'POST':
         first_name = register_form.first_name.data
@@ -50,13 +49,13 @@ def register():
             error = 'Please supply both a first and last name'
 
         else:
-            people.append({'Firstname': first_name, 'Lastname': last_name, 'Email': email})
-            add_person(first_name, last_name, email)
+            people.append({'Firstname': first_name, 'Lastname': last_name, 'Email': email, 'Role': role})
+            add_person(first_name, last_name, email, role)
             # Flash a success message
             flash('Registration successful! Please login or signup.', 'success')  # 'success' is the category of the flash message
-            return redirect(url_for('register'))
+            return redirect(url_for('login'))
 
-    return render_template('register.html', form=register_form, message=error)
+    return render_template('register.html', form=register_form, message=error,role=role)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -134,7 +133,7 @@ def all_people():
     return render_template('people.html', people=people, title='All People')
 
 
-@app.route('/peopledb')
+@app.route('/admin/peopledb')
 def all_people_from_db():
     people_from_db = get_people() # This fetches the list of people from the database
     print(people_from_db)
@@ -161,6 +160,19 @@ def project_detail(project_id):
         return render_template('404.html'), 404
     # If project is found, it renders the project_details page with the project data
     return render_template('project_details.html', project=project)
+
+@app.route("/about")
+def about():
+    return render_template("about_us.html", title="About Us")
+
+@app.route('/admin/users')
+def view_users():
+    if session.get('role') != 'admin':
+        flash("Access denied. Admins only.", "danger")
+        return redirect(url_for('login'))
+
+    users = get_people()
+    return render_template('view_users.html', users=users)
 
 
 @app.route('/logout')

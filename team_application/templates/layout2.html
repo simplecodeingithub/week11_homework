@@ -42,14 +42,12 @@
                 <li class="nav-item"><a class="nav-link" href="/teams">Teams</a></li>
 
                 {% if session['role'] == 'admin' %}
-                <li class="nav-item"><a class="nav-link text-warning">Admin</a></li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Admin Access</a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/admin/users">View Users</a></li>
-                        <li><a class="dropdown-item" href="/admin/manage_users">Manage Users</a></li>
-                        <li><a class="dropdown-item" href="/admin/roles">Manage Roles</a></li>
-                        <li><a class="dropdown-item" href="/admin/database">Database Access</a></li>
+                        <li><a class="dropdown-item" href="/admin/peopledb">Database People</a></li>
                     </ul>
                 </li>
                 {% endif %}
@@ -60,7 +58,6 @@
                         <li><a class="dropdown-item" href="/register">Register</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="/people">All People</a></li>
-                        <li><a class="dropdown-item" href="/peopledb">Database People</a></li>
                     </ul>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>

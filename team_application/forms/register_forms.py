@@ -11,4 +11,5 @@ class RegisterForm(FlaskForm):
     first_name = StringField('First Name', validators=[DataRequired()])
     last_name = StringField('Last Name', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
-    submit = SubmitField('Add Name')
+    #username = StringField('Username')  # Add this field for username input
+    submit = SubmitField('Register')

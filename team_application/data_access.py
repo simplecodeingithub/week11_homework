@@ -24,13 +24,13 @@ def get_db_connection():
 
 
 # Add a new person to the database
-def add_person(fname, lname, email):
+def add_person(fname, lname, email, role):
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    # Change the SQL query to use 'email' instead of 'age'
-    sql = "INSERT INTO person (firstname, lastname, email) VALUES (%s, %s, %s)"
-    val = (fname, lname, email)
+
+    sql = "INSERT INTO person (firstname, lastname, email, role) VALUES (%s, %s, %s, %s)"
+    val = (fname, lname, email, role)
     cursor.execute(sql, val)
 
     conn.commit()
@@ -39,13 +39,14 @@ def add_person(fname, lname, email):
     conn.close()
 
 
+
 # Retrieve the list of people from the database
 def get_people():
     conn = get_db_connection()
     cursor = conn.cursor()
 
     # Fetch the ID, Firstname, Lastname, and Email from the person table
-    sql = "SELECT PersonID, Firstname, Lastname, email FROM person"
+    sql = "SELECT PersonID, Firstname, Lastname, email, role FROM person"
     cursor.execute(sql)
 
     result_set = cursor.fetchall()
@@ -55,7 +56,8 @@ def get_people():
             'PersonID': person[0],
             'Firstname': person[1],
             'Lastname': person[2],
-            'Email': person[3]  # Adding the email in the result
+            'Email': person[3],  # Added the email in the result
+            'Role': person[4]    # added the role in the result
         })
 
     cursor.close()
@@ -70,8 +72,10 @@ def main():
 
     cursor = mydb.cursor()
 
-    sql = "INSERT INTO person (firstname, lastname, email) VALUES (%s, %s, %s)"
-    val = ("Fred", "Flintstone", "FredFlin@gmail.com")
+    sql = "INSERT INTO person (firstname, lastname, email,role) VALUES (%s, %s, %s)"
+    val = ("Fred", "Flintstone", "FredFlin@gmail.com","user")
+
+
     cursor.execute(sql, val)
 
     mydb.commit()
