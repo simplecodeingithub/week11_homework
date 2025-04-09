@@ -1,66 +1,68 @@
-Team App - README
-Overview
-The Team Application is a Flask-based web app designed to manage users, teams, and projects. The app supports features like user registration, login, project management, and administrative functionalities. It is connected to a MySQL database where user, project, and contact information is stored.
+# Team App - README
 
-The app uses Flask, Jinja templates, and Bootstrap 5 for the frontend to create a responsive, user-friendly interface.
+## Overview
 
-Features
-1. Basic Routes
-/ — The homepage, displays a greeting message.
+The **Team Application** is a Flask-based web app designed to manage users, teams, and projects. The app supports features like user registration, login, project management, and administrative functionalities. It is connected to a **MySQL database** where user, project, and contact information is stored.
 
-/home — The same as the homepage.
+The app uses **Flask**, **Jinja templates**, and **Bootstrap 5** for the frontend to create a responsive, user-friendly interface.
 
-/home/<string:name> — A personalized homepage greeting. The name in the URL will be used for a custom message (e.g., /home/Bob will greet "Bob").
+---
 
-2. Registration and Login Routes
-/register — A registration form for new users.
+## Features
 
-/login — A login form that allows users to log in by entering their first name.
+### 1. **Basic Routes**
 
-/logout — Logs the user out and redirects them to the homepage.
+- **`/`** — The homepage, displays a greeting message.
+- **`/home`** — The same as the homepage.
+- **`/home/<string:name>`** — A personalized homepage greeting. The `name` in the URL will be used for a custom message (e.g., `/home/Bob` will greet "Bob").
 
-3. User and Project Management Routes
-/people — Displays a list of all users (people) in the app.
+### 2. **Registration and Login Routes**
 
-/peopledb — Displays a list of people fetched from the database.
+- **`/register`** — A registration form for new users.
+- **`/login`** — A login form that allows users to log in by entering their first name.
+- **`/logout`** — Logs the user out and redirects them to the homepage.
 
-/projects — Lists all projects in the system.
+### 3. **User and Project Management Routes**
 
-/project/<int:project_id> — Displays a specific project by its ID.
+- **`/people`** — Displays a list of all users (people) in the app.
+- **`/peopledb`** — Displays a list of people fetched from the database.
+- **`/projects`** — Lists all projects in the system.
+- **`/project/<int:project_id>`** — Displays a specific project by its ID.
+- **`/project_detail/<int:project_id>`** — Shows detailed information about a specific project.
 
-/project_detail/<int:project_id> — Shows detailed information about a specific project.
+### 4. **Admin-Specific Pages**
 
-4. Admin-Specific Pages
-/admin/view_users — Admin-only route to view all users in the system.
+- **`/admin/view_users`** — Admin-only route to view all users in the system.
+- **`/admin/peopledb`** — Admin-only route to view people data from the database.
 
-/admin/peopledb — Admin-only route to view people data from the database.
+### 5. **Contact and About Us Pages**
 
-5. Contact and About Us Pages
-/contact — A contact form where users can submit their name, email, and message.
+- **`/contact`** — A contact form where users can submit their name, email, and message.
+- **`/about`** — An "About Us" page that gives information about the team and the project.
 
-/about — An "About Us" page that gives information about the team and the project.
+### 6. **Error Handling**
 
-6. Error Handling
-404.html — Displays an error page when a route is not found.
+- **`404.html`** — Displays an error page when a route is not found.
+- **`500.html`** — Displays an error page for server-side issues.
 
-500.html — Displays an error page for server-side issues.
+---
 
-MySQL Database Integration
-The app integrates with a MySQL database and uses the following tables:
+## MySQL Database Integration
 
-person — Stores user details (first name, last name, email, role).
+The app integrates with a **MySQL database** and uses the following tables:
 
-project — Stores project details (name, description, image, etc.).
+- **`person`** — Stores user details (first name, last name, email, role).
+- **`project`** — Stores project details (name, description, image, etc.).
+- **`contact`** — Stores contact form submissions (name, email, message).
 
-contact — Stores contact form submissions (name, email, message).
+Data is fetched from the database using functions in `data_access.py`.
 
-Data is fetched from the database using functions in data_access.py.
+---
 
-Session Management
-Session management is used to track whether a user is logged in and to store their role (user/admin). The session object is used to handle user authentication:
+## Session Management
 
-Login: After logging in, the session is updated with the username, role, and login status.
+Session management is used to track whether a user is logged in and to store their role (user/admin). The **session** object is used to handle user authentication:
 
-Logout: Logs the user out by clearing the session data.
-
-Admin Access: Routes such as /admin/view_users and /admin/peopledb are restricted to users with the admin role.
+- **Login**: After logging in, the session is updated with the username, role, and login status.
+- **Logout**: Logs the user out by clearing the session data.
+- **Admin Access**: Routes such as `/admin/view_users` and `/admin/peopledb` are restricted to users with the admin role.
