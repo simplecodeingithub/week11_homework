@@ -177,7 +177,7 @@ def project_by_id(project_id):
     total = len(all_projects)
 
     # Generate URLs for next and previous projects
-    next_url = url_for('project_by_id', project_id=project_id + 1) if project_id + 1 < total else None
+    next_url = url_for('project_by_id', project_id=project_id + 1) if project_id + 1 < 4 else None
     previous_url = url_for('project_by_id', project_id=project_id - 1) if project_id > 0 else None
 
     # Check for the existence of the project images and choose the correct format
@@ -191,7 +191,7 @@ def project_by_id(project_id):
 
     # If no image found, use a default image
     if not image_src:
-        image_src = '/static/images/default.jpg'  # Replace this with your default image path if needed
+        image_src = '/static/images/image_1.jpg'
 
     # Check for an optional GIF for the project
     gif_filename = f'project_{project_id}.gif'
