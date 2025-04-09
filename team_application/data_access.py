@@ -83,6 +83,57 @@ def main():
 
     print(cursor.rowcount, "record inserted.")
 
+# Add a project
+def add_project(name, description, image_src):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    sql = "INSERT INTO project (name, description, image_src) VALUES (%s, %s, %s)"
+    val = (name, description, image_src)
+    cursor.execute(sql, val)
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+# Get all projects
+def get_projects():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    sql = "SELECT id, name, description, image_src FROM project"
+    cursor.execute(sql)
+    results = cursor.fetchall()
+    cursor.close()
+    conn.close()
+
+    return [
+        {
+            'ID': row[0],
+            'name': row[1],
+            'description': row[2],
+            'image_src': row[3]
+        }
+        for row in results
+    ]
+
+# Get project by ID
+def get_project_by_id(project_id):
+    connection = get_db_connection()
+    cursor = connection.cursor()
+
+    query = "SELECT * FROM project WHERE ID = %s"  # ✅ fixed table name
+    cursor.execute(query, (project_id,))
+    project = cursor.fetchone()
+
+    connection.close()
+
+    if project:
+        return {
+            'ID': project[0],
+            'name': project[1],
+            'description': project[2],
+            'image_src': project[3]
+        }
+    else:
+        return None
 
 
 if __name__ == "__main__":

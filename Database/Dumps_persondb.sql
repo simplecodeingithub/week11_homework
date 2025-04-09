@@ -71,6 +71,23 @@ INSERT INTO `person` VALUES (1,'Renee','Gujral',1,NULL,NULL),(2,'Fowsiya','Olow'
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
+CREATE TABLE IF NOT EXISTS project (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    description TEXT NOT NULL,
+    image_src VARCHAR(255)  -- This column stores the image filename or path
+);
+
+select * 
+from project;
+
+INSERT INTO project (name, description, image_src) 
+VALUES 
+('Team Website', 'A simple website built for our team with HTML, CSS, and Flask.', 'image_1.jpg'),
+('Task Manager App', 'A web app to track tasks and assign responsibilities among team members.', 'project_1.jpg'),
+('Team Chatbot', 'An AI-powered chatbot to answer FAQs related to the project workflow.', 'project_2.png');
+
 --
 -- Temporary view structure for view `vpeoplefavouritecolurs`
 --
