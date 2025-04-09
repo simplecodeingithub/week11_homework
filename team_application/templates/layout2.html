@@ -42,7 +42,7 @@
 
 
 
-                {% if session['role'] == 'admin' %}
+                {% if session.get('role') == 'admin' %}
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Admin Access</a>

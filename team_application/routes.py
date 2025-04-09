@@ -69,58 +69,26 @@ def login():
     return render_template('login.html', message=error)  # Show login page
 
 
-# # Route to show an individual project
-# @app.route('/project/<int:project_id>')
-# def project_by_id(project_id):
-#     if project_id + 1 > len(projects):  # If project_id is out of range, redirect to all projects page
-#         return render_template('projects.html', projects=projects, title='All Projects')
+# @app.route('/login', methods=['GET', 'POST'])
+# def login():
+#     error = ""
+#     if request.method == 'POST':
+#         firstname = request.form['username']
 #
-#     # Time-based greeting
-#     time_slot = get_time_of_day(datetime.now().hour)
+#         # Fetch user from DB using firstname (replace with real query logic)
+#         user = get_user_by_firstname(firstname)  # You must have this function
 #
-#     # URLs to navigate for next and previous project
-#     if len(projects) > project_id + 1:
-#         next_url = url_for('project_by_id', project_id=project_id + 1)
-#     else:
-#         next_url = False
-#     if project_id > 0:
-#         previous_url = url_for('project_by_id', project_id=project_id - 1)
-#     else:
-#         previous_url = False
+#         if user:
+#             session['username'] = firstname
+#             session['role'] = user['role']  # Set the actual role from DB
+#             session['loggedIn'] = True
 #
-#         # Image paths for the project (checking for .jpg, .jpeg, and .png)
-#     image_src = '/static/images/project_' + str(project_id) + '.jpg'
-#     if not os.path.exists(os.path.join(app.static_folder, 'images/project_' + str(project_id) + '.jpg')):
-#         image_src = '/static/images/project_' + str(project_id) + '.jpeg'
-#         if not os.path.exists(os.path.join(app.static_folder, 'images/project_' + str(project_id) + '.jpeg')):
-#             image_src = '/static/images/project_' + str(project_id) + '.png'
+#             return redirect(url_for('all_projects'))
+#         else:
+#             error = "User not found"
 #
-#     # Check for the existence of the optional GIF file for the project
-#     gif_path = os.path.join(app.static_folder, 'images/project_' + str(project_id) + '.gif')
-#     if os.path.exists(gif_path):
-#         image_gif = '../static/images/project_' + str(project_id) + '.gif'
-#     else:
-#         image_gif = False
+#     return render_template('login.html', message=error)
 #
-#     # Project title
-#     title = projects[project_id]['name']
-#
-#     return render_template(
-#         'project.html',
-#         project=projects[project_id],
-#         time_slot=time_slot,
-#         next_url=next_url,
-#         previous_url=previous_url,
-#         image_src=image_src,
-#         image_gif=image_gif,
-#         title=title
-#     )
-#
-#
-# # Route to show all projects
-# @app.route('/projects')
-# def all_projects():
-#     return render_template('projects.html', projects=projects, title='All Projects')
 
 # Display only first names to users not logged in, and show full names/emails if they are logged in.
 @app.route('/people')
@@ -157,18 +125,6 @@ def contact_us():
         return render_template('contact.html', success=success)
 
     return render_template('contact.html', success=success)
-
-
-# @app.route('/project_details/<int:project_id>')
-# def project_detail(project_id):
-#     # This line searches for a project with the given project_id and returns it; if not found, returns None
-#     project = next((proj for proj in projects if proj['ID'] == project_id), None)
-#     # If project is not found, return a 404 error page
-#     if project is None:
-#         return render_template('404.html'), 404
-#     # If project is found, it renders the project_details page with the project data
-#     return render_template('project_details.html', project=project)
-
 
 
 @app.route("/about")

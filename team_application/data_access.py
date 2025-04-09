@@ -136,5 +136,28 @@ def get_project_by_id(project_id):
         return None
 
 
+# def get_user_by_firstname(firstname):
+#     conn = get_db_connection()
+#     cursor = conn.cursor()
+#
+#     # If you're using SQLite, use ? instead of %s
+#     try:
+#         cursor.execute("SELECT firstname, role FROM person WHERE firstname = ?", (firstname,))
+#         user = cursor.fetchone()
+#         conn.close()
+#
+#         if user:
+#             return {
+#                 'firstname': user[0],
+#                 'role': user[1]
+#             }
+#         else:
+#             return None
+#     except Exception as e:
+#         conn.close()
+#         print("Error fetching user:", e)
+#         return None
+
+
 if __name__ == "__main__":
     main()
