@@ -88,7 +88,20 @@ VALUES
 ('Task Manager App', 'A web app to track tasks and assign responsibilities among team members.', 'project_1.jpg'),
 ('Team Chatbot', 'An AI-powered chatbot to answer FAQs related to the project workflow.', 'project_2.png');
 
+
+CREATE TABLE contact_submissions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    message TEXT NOT NULL,
+    submission_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+select * 
+from contact_submissions;
+
 --
+
 -- Temporary view structure for view `vpeoplefavouritecolurs`
 --
 

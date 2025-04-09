@@ -4,7 +4,8 @@ from team_application import app
 from datetime import datetime
 from team_application.utilities import get_time_of_day
 from team_application.forms.register_forms import RegisterForm
-from team_application.data_access import add_person, get_people ,get_projects ,get_project_by_id, get_db_connection
+from team_application.forms.contact_form import ContactForm
+from team_application.data_access import add_person, get_people ,get_projects ,get_project_by_id, get_db_connection, add_contact_submission
 from team_application.data import people, projects
 from team_application.fake_data import person
 import os
@@ -105,26 +106,26 @@ def all_people_from_db():
     return render_template('people2.html', people=people_from_db, title='Database People')
 
 
-@app.route('/contact', methods=['GET', 'POST'])
-def contact_us():
-    success = False
-    if request.method == 'POST':
-        # Here you can get the form data
-        name = request.form['name']
-        email = request.form['email']
-        message = request.form['message']
-
-
-        # For example, just printing the data to the console
-        print(f"New message from {name} ({email}): {message}")
-
-        # Set the success flag to True after form submission
-        success = True
-
-        # Redirect to the same page with a success message
-        return render_template('contact.html', success=success)
-
-    return render_template('contact.html', success=success)
+# @app.route('/contact', methods=['GET', 'POST'])
+# def contact_us():
+#     success = False
+#     if request.method == 'POST':
+#         # Here you can get the form data
+#         name = request.form['name']
+#         email = request.form['email']
+#         message = request.form['message']
+#
+#
+#         # For example, just printing the data to the console
+#         print(f"New message from {name} ({email}): {message}")
+#
+#         # Set the success flag to True after form submission
+#         success = True
+#
+#         # Redirect to the same page with a success message
+#         return render_template('contact.html', success=success)
+#
+#     return render_template('contact.html', success=success)
 
 
 @app.route("/about")
@@ -219,3 +220,11 @@ def project_detail(project_id):
 
     return render_template('project_details.html', project=project)
 
+@app.route("/contact", methods=["GET", "POST"])
+def contact():
+    form = ContactForm()
+    if form.validate_on_submit():
+        add_contact_submission(form.name.data, form.email.data, form.message.data)
+        flash('Your message has been sent. Thank you!')
+        return redirect(url_for('contact'))
+    return render_template('contact.html', form=form)

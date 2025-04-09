@@ -135,6 +135,13 @@ def get_project_by_id(project_id):
     else:
         return None
 
+def add_contact_submission(name, email, message):
+    cursor = mydb.cursor()
+    query = "INSERT INTO contact_submissions (name, email, message) VALUES (%s, %s, %s)"
+    values = (name, email, message)
+    cursor.execute(query, values)
+    mydb.commit()
+    cursor.close()
 
 # def get_user_by_firstname(firstname):
 #     conn = get_db_connection()
